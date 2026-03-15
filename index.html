@@ -68,23 +68,28 @@ h1.hn{font-family:var(--fh);font-size:clamp(2.8rem,5.5vw,4.8rem);font-weight:900
 .hmv .acc{color:var(--blue);}
 .hml{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:500;}
 
-/* TERMINAL */
-.hero-right{position:relative;}
-.terminal{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 0 60px rgba(56,139,253,.05),0 40px 80px rgba(0,0,0,.4);}
-.tbar{background:var(--card2);padding:11px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
-.td{width:12px;height:12px;border-radius:50%;}
-.td.r{background:#ff5f57;}.td.y{background:#febc2e;}.td.g{background:#28c840;}
-.ttitle{font-family:var(--fm);font-size:.72rem;color:var(--muted);margin-left:auto;margin-right:auto;}
-.tbody{padding:1.4rem;font-family:var(--fm);font-size:.8rem;line-height:2.1;}
-.tl{display:block;}
-.tp{color:var(--green);}.tk{color:var(--purple);}.tv{color:var(--cyan2);}.ts2{color:var(--blue2);}.tn{color:var(--cyan);}.tc{color:var(--muted);}.tout{color:var(--muted2);padding-left:1rem;display:block;}.tok{color:var(--green);}
-.tb{display:block;height:.4rem;}
-.fbadge{position:absolute;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:9px 13px;font-family:var(--fm);font-size:.7rem;color:var(--blue2);white-space:nowrap;animation:fy 4s ease-in-out infinite;box-shadow:0 8px 32px rgba(0,0,0,.3);}
-.fbadge.f1{top:-18px;right:16px;animation-delay:0s;}
-.fbadge.f2{bottom:32px;left:-28px;animation-delay:1.5s;}
+/* HERO PHOTO CARD */
+.hero-right{position:relative;display:flex;justify-content:center;align-items:center;}
+.photo-wrap{position:relative;width:100%;max-width:420px;margin:0 auto;}
+.photo-glow{position:absolute;inset:-2px;border-radius:24px;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--purple) 100%);z-index:0;opacity:.5;filter:blur(18px);animation:glowpulse 3s ease-in-out infinite;}
+@keyframes glowpulse{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:.7;transform:scale(1.02);}}
+.photo-card{position:relative;z-index:1;background:var(--card);border:1px solid var(--border2);border-radius:24px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);}
+.photo-card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:top;}
+.photo-overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(0deg,rgba(3,7,18,.95) 0%,rgba(3,7,18,.7) 60%,transparent 100%);}
+.po-name{font-family:var(--fh);font-size:1.2rem;font-weight:800;color:var(--white);letter-spacing:-.03em;margin-bottom:3px;}
+.po-role{font-family:var(--fm);font-size:.72rem;color:var(--cyan);letter-spacing:.06em;}
+.po-badges{display:flex;gap:.5rem;margin-top:.7rem;flex-wrap:wrap;}
+.po-badge{background:rgba(56,139,253,.15);border:1px solid rgba(56,139,253,.25);color:var(--blue2);padding:3px 10px;border-radius:100px;font-family:var(--fm);font-size:.65rem;font-weight:600;}
+.fbadge{position:absolute;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:9px 13px;font-family:var(--fm);font-size:.7rem;color:var(--blue2);white-space:nowrap;animation:fy 4s ease-in-out infinite;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:2;}
+.fbadge.f1{top:-16px;right:-8px;animation-delay:0s;}
+.fbadge.f2{bottom:90px;left:-20px;animation-delay:1.5s;}
 .fbd{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px;}
 .f1 .fbd{background:var(--cyan);}.f2 .fbd{background:var(--purple);}
 @keyframes fy{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.stat-pill{position:absolute;top:18px;left:-18px;z-index:2;background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.4);animation:fy 4s ease-in-out infinite;animation-delay:.8s;}
+.sp-val{font-family:var(--fh);font-size:1.3rem;font-weight:900;color:var(--white);letter-spacing:-.04em;line-height:1;}
+.sp-val span{color:var(--blue);}
+.sp-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
 
 /* ABOUT */
 #about{background:var(--bg2);}
@@ -283,32 +288,31 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.8rem 5
     </div>
   </div>
   <div class="hero-right">
-    <div class="fbadge f1"><span class="fbd"></span>Python · Pandas · NumPy</div>
-    <div class="terminal">
-      <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="ttitle">prithika_profile.py</span></div>
-      <div class="tbody">
-        <span class="tl"><span class="tc"># Data Analyst Profile</span></span>
-        <span class="tb"></span>
-        <span class="tl"><span class="tk">analyst</span> = {</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"name"</span>: <span class="tv">"Prithikasree S B"</span>,</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"role"</span>: <span class="tv">"Data Analyst"</span>,</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"location"</span>: <span class="tv">"Chennai, India"</span>,</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"cgpa"</span>: <span class="tn">8.71</span>,</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"skills"</span>: [<span class="tv">"Python"</span>, <span class="tv">"SQL"</span>, <span class="tv">"Power BI"</span>,</span>
-        <span class="tl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tv">"ML"</span>, <span class="tv">"EDA"</span>, <span class="tv">"TensorFlow"</span>],</span>
-        <span class="tl">&nbsp;&nbsp;<span class="ts2">"status"</span>: <span class="tv">"open_to_work"</span></span>
-        <span class="tl">}</span>
-        <span class="tb"></span>
-        <span class="tl"><span class="tp">$</span> python run_analysis.py</span>
-        <span class="tout">▸ Loading datasets... done</span>
-        <span class="tout">▸ Running EDA... done</span>
-        <span class="tout">▸ Training model... done</span>
-        <span class="tout">▸ Accuracy: <span style="color:var(--cyan2)">90.00%</span></span>
-        <span class="tb"></span>
-        <span class="tl"><span class="tok">✓ Analysis complete.</span></span>
+    <div class="photo-wrap">
+      <!-- Floating stat pill -->
+      <div class="stat-pill">
+        <div><div class="sp-val">8<span>.71</span></div><div class="sp-label">CGPA</div></div>
+      </div>
+      <!-- Floating badges -->
+      <div class="fbadge f1"><span class="fbd"></span>Open to Work</div>
+      <div class="fbadge f2"><span class="fbd"></span>Power BI · ML · Python</div>
+      <!-- Glow effect -->
+      <div class="photo-glow"></div>
+      <!-- Photo card -->
+      <div class="photo-card">
+        <img src="https://raw.githubusercontent.com/Prithikasree/Prithikasree.github.io/main/Photo.png" alt="Prithikasree S B — Data Analyst"/>
+        <div class="photo-overlay">
+          <div class="po-name">Prithikasree S B</div>
+          <div class="po-role">// Data Analyst · Chennai, India</div>
+          <div class="po-badges">
+            <span class="po-badge">Python</span>
+            <span class="po-badge">SQL</span>
+            <span class="po-badge">Power BI</span>
+            <span class="po-badge">ML</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="fbadge f2"><span class="fbd"></span>Power BI · DAX · Scikit-learn</div>
   </div>
 </section>
 
