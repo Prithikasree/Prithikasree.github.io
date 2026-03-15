@@ -231,21 +231,77 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.8rem 5
 .rev.on{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
-/* RESPONSIVE */
+/* HAMBURGER MENU */
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:1px solid var(--border);border-radius:7px;background:transparent;}
+.ham span{display:block;width:20px;height:2px;background:var(--muted2);border-radius:2px;transition:all .3s;}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mob-menu{display:none;position:fixed;top:66px;left:0;right:0;z-index:499;background:rgba(3,7,18,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 5%;flex-direction:column;gap:.25rem;}
+.mob-menu.open{display:flex;}
+.mob-menu a{color:var(--muted2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.7rem 1rem;border-radius:8px;transition:all .2s;letter-spacing:.02em;}
+.mob-menu a:hover,.mob-menu a.active{color:var(--white);background:rgba(56,139,253,.1);}
+.mob-cta{background:var(--blue)!important;color:#fff!important;text-align:center;margin-top:.25rem;}
+
+/* RESPONSIVE — TABLET */
 @media(max-width:900px){
-  #home{grid-template-columns:1fr;padding-top:8rem;gap:2.5rem;}
-  .hero-right{display:none;}
+  #home{grid-template-columns:1fr;padding-top:8rem;gap:0;}
+  .hero-right{display:flex;justify-content:center;margin-top:2.5rem;}
+  .photo-wrap{max-width:320px;}
+  .photo-card img{aspect-ratio:3/4;}
+  .stat-pill{left:-10px;top:14px;}
+  .fbadge.f2{left:-10px;}
   .ag{grid-template-columns:1fr;gap:2.5rem;}
   .sl{grid-template-columns:1fr;}
   .edlay{grid-template-columns:1fr;}
   .cg{grid-template-columns:1fr;gap:2.5rem;}
   .nav-links{display:none;}
+  .ham{display:flex;}
 }
+
+/* RESPONSIVE — MOBILE */
 @media(max-width:600px){
+  #home{padding:6rem 4% 3rem;gap:0;}
+  h1.hn{font-size:clamp(2.2rem,10vw,3rem);}
+  .hero-role{font-size:clamp(.95rem,4vw,1.3rem);}
+  .hero-bio{font-size:.9rem;}
+  .hbtns{gap:.7rem;}
+  .bg,.bgh{padding:.7rem 1.3rem;font-size:.85rem;}
+  .hmetrics{gap:1rem;flex-wrap:wrap;}
+  .hm{min-width:calc(50% - .5rem);}
+  .hmv{font-size:1.5rem;}
+  .hero-right{margin-top:2rem;}
+  .photo-wrap{max-width:260px;}
+  .photo-card img{aspect-ratio:3/4;}
+  .stat-pill{display:none;}
+  .fbadge.f1{top:-12px;right:0;}
+  .fbadge.f2{bottom:80px;left:-5px;font-size:.62rem;padding:7px 10px;}
+  .po-name{font-size:1rem;}
+  .po-role{font-size:.65rem;}
+  .po-badges{gap:.35rem;}
+  .po-badge{font-size:.6rem;padding:2px 8px;}
   .pg{grid-template-columns:1fr;}
-  .hmetrics{gap:1.2rem;}
   .ec{grid-template-columns:1fr;gap:1rem;}
   .etc{display:none;}
+  .wrap{padding:0 4%;}
+  .sp{padding:4.5rem 0;}
+  h2.st{font-size:clamp(1.6rem,6vw,2.2rem);}
+  .pmet{gap:.6rem;padding:.7rem .8rem;}
+  .pmv{font-size:.85rem;}
+  .edlay{grid-template-columns:1fr;}
+  .cgnum{font-size:2rem;}
+  .cg{grid-template-columns:1fr;gap:2rem;}
+  .cf2{padding:1.6rem;}
+  footer{flex-direction:column;align-items:flex-start;}
+  .hmetrics{padding-top:1.5rem;margin-top:1.5rem;}
+}
+
+/* RESPONSIVE — SMALL MOBILE */
+@media(max-width:380px){
+  #home{padding:5.5rem 4% 2.5rem;}
+  h1.hn{font-size:2rem;}
+  .photo-wrap{max-width:220px;}
+  .hmv{font-size:1.3rem;}
 }
 </style>
 </head>
@@ -267,7 +323,20 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.8rem 5
     <li><a href="#education">Education</a></li>
     <li><a href="#contact" class="nav-cta">Hire Me</a></li>
   </ul>
+  <div class="ham" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mob-menu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#education" onclick="closeMenu()">Education</a>
+  <a href="#contact" class="mob-cta" onclick="closeMenu()">Hire Me</a>
+</div>
 
 <!-- HERO -->
 <section id="home">
@@ -615,8 +684,18 @@ document.querySelectorAll('.pc').forEach(c=>{
   c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});
 });
 
+/* HAMBURGER */
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('mob-menu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('mob-menu').classList.remove('open');
+}
+
 /* ACTIVE NAV */
-const secs=document.querySelectorAll('section[id]'),lnks=document.querySelectorAll('.nav-links a');
+const secs=document.querySelectorAll('section[id]'),lnks=document.querySelectorAll('.nav-links a, .mob-menu a');
 window.addEventListener('scroll',()=>{
   let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-100)c=s.id;});
   lnks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
